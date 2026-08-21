@@ -421,7 +421,7 @@ BarWidget {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: omapetsLogo.implicitHeight + Style.spacing.md + petActionRow.height
+        height: omapetsLogo.implicitHeight
 
         Text {
           id: omapetsLogo
@@ -436,42 +436,41 @@ BarWidget {
           horizontalAlignment: Text.AlignHCenter
           textFormat: Text.PlainText
         }
+      }
 
-        Row {
-          id: petActionRow
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: omapetsLogo.bottom
-          anchors.topMargin: Style.spacing.md
-          height: installPetButton.implicitHeight
-          spacing: Style.spacing.sm
+      Row {
+        id: petActionRow
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: installPetButton.implicitHeight
+        spacing: Style.spacing.sm
 
-          Button {
-            id: installPetButton
-            width: (petActionRow.width - petActionRow.spacing * 2) / 3
-            text: "Install pet"
-            bordered: true
-            focusable: true
-            onClicked: root.openPetInstaller()
-          }
+        Button {
+          id: installPetButton
+          width: (petActionRow.width - petActionRow.spacing * 2) / 3
+          text: "Install pet"
+          bordered: true
+          focusable: true
+          onClicked: root.openPetInstaller()
+        }
 
-          Button {
-            id: openPetsFolderButton
-            width: installPetButton.width
-            text: "Open folder"
-            bordered: true
-            focusable: true
-            onClicked: root.openPetsFolder()
-          }
+        Button {
+          id: openPetsFolderButton
+          width: installPetButton.width
+          text: "Open folder"
+          bordered: true
+          focusable: true
+          onClicked: root.openPetsFolder()
+        }
 
-          Button {
-            id: installHooksButton
-            width: installPetButton.width
-            text: "Agent hooks"
-            bordered: true
-            focusable: true
-            onClicked: root.openAgentHookInstaller()
-          }
+        Button {
+          id: installHooksButton
+          width: installPetButton.width
+          text: "Agent hooks"
+          bordered: true
+          focusable: true
+          onClicked: root.openAgentHookInstaller()
         }
       }
 
@@ -481,7 +480,8 @@ BarWidget {
         anchors.right: parent.right
         anchors.top: petPickerHeader.bottom
         anchors.topMargin: Style.spacing.md
-        anchors.bottom: parent.bottom
+        anchors.bottom: petActionRow.top
+        anchors.bottomMargin: Style.spacing.md
         cellWidth: width / 3
         cellHeight: Style.space(104)
         clip: true
@@ -548,6 +548,8 @@ BarWidget {
         anchors.right: parent.right
         anchors.top: petPickerHeader.bottom
         anchors.topMargin: Style.space(36)
+        anchors.bottom: petActionRow.top
+        anchors.bottomMargin: Style.spacing.md
         spacing: Style.spacing.md
         visible: !petScanner.running && root.availablePets.length === 0
 

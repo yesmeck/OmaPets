@@ -60,8 +60,8 @@ assert.match(
 
 assert.match(
   qml,
-  /GridView\s*\{[\s\S]*?anchors\.top:\s*petPickerHeader\.bottom[\s\S]*?anchors\.bottom:\s*parent\.bottom[\s\S]*?ScrollBar\.vertical:\s*ScrollBar/,
-  "the pet grid must fill a vertically scrollable viewport",
+  /GridView\s*\{[\s\S]*?anchors\.top:\s*petPickerHeader\.bottom[\s\S]*?anchors\.bottom:\s*petActionRow\.top[\s\S]*?ScrollBar\.vertical:\s*ScrollBar/,
+  "the pet grid must fill the scrollable viewport above the action toolbar",
 )
 
 assert.match(
@@ -114,8 +114,8 @@ assert.match(
 
 assert.match(
   qml,
-  /Row\s*\{\s*id:\s*petActionRow[\s\S]*?id:\s*installPetButton[\s\S]*?id:\s*openPetsFolderButton[\s\S]*?id:\s*installHooksButton/,
-  "pet management actions must be grouped in one equal-width toolbar",
+  /Row\s*\{\s*id:\s*petActionRow[\s\S]*?anchors\.bottom:\s*parent\.bottom[\s\S]*?id:\s*installPetButton[\s\S]*?id:\s*openPetsFolderButton[\s\S]*?id:\s*installHooksButton/,
+  "pet management actions must be grouped in one bottom toolbar",
 )
 
 assert.match(
