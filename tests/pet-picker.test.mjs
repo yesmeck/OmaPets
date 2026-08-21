@@ -31,7 +31,43 @@ assert.doesNotMatch(
 assert.doesNotMatch(
   qml,
   /assets\/ponyta|Ponyta \(bundled\)/,
-  "the plugin must not depend on a bundled pet",
+  "the plugin must not depend on the old Ponyta pet",
+)
+
+assert.match(
+  qml,
+  /bundledPetPath:[\s\S]*?Qt\.resolvedUrl\("assets\/pets\/glitchcat"\)[\s\S]*?resolvedPetPath:\s*configuredPetPath\s*===\s*""[\s\S]*?bundledPetPath/,
+  "Glitchcat must be the bundled fallback when no pet is configured",
+)
+
+assert.doesNotMatch(
+  qml,
+  /visible:\s*!root\.petAvailable|text:\s*"󰄛"/,
+  "the bar must not render a placeholder when Glitchcat is loading",
+)
+
+assert.match(
+  qml,
+  /onPetManifestUrlChanged:\s*\{[\s\S]*?manifestRetryCount\s*=\s*0[\s\S]*?manifestRetryTimer\.restart\(\)/,
+  "selecting the first installed pet must schedule a manifest load after settings settle",
+)
+
+assert.match(
+  qml,
+  /Loader\s*\{\s*id:\s*petManifestLoader[\s\S]*?active:\s*root\.petManifestUrl\s*!==\s*""[\s\S]*?sourceComponent:\s*FileView/,
+  "placeholder mode must not construct a FileView with an empty path",
+)
+
+assert.match(
+  qml,
+  /onLoadFailed:\s*\{[\s\S]*?manifestRetryCount\s*<\s*3[\s\S]*?manifestRetryCount\+\+[\s\S]*?manifestRetryTimer\.restart\(\)/,
+  "a transient manifest read failure must retry without looping forever",
+)
+
+assert.match(
+  qml,
+  /function\s+selectPet\(id\)[\s\S]*?updated\s*=\s*root\.bar\.shell\.updateEntryInline\(root\.moduleName,\s*entry\)[\s\S]*?if\s*\(!updated\)\s*root\.settings\s*=\s*entry/,
+  "pet selection must use host-owned settings propagation before falling back to a local update",
 )
 
 assert.match(

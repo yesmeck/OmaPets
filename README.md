@@ -14,7 +14,12 @@ Install and enable OmaPets:
 omarchy plugin add https://github.com/yesmeck/OmaPets.git --enable --yes
 ```
 
-Click the placeholder in the bar to open the OmaPets panel.
+Click the pet in the bar to open the OmaPets panel.
+
+## Bundled pet
+
+OmaPets includes [Glitchcat from Petdex](https://petdex.dev/pets/glitchcat)
+as its default pet.
 
 ## Install a pet
 
