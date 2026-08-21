@@ -114,8 +114,8 @@ assert.match(
 
 assert.match(
   qml,
-  /Row\s*\{\s*id:\s*petActionRow[\s\S]*?anchors\.bottom:\s*parent\.bottom[\s\S]*?id:\s*installPetButton[\s\S]*?id:\s*openPetsFolderButton[\s\S]*?id:\s*installHooksButton/,
-  "pet management actions must be grouped in one bottom toolbar",
+  /Row\s*\{\s*id:\s*petActionRow[\s\S]*?anchors\.bottom:\s*parent\.bottom[\s\S]*?id:\s*installPetButton[\s\S]*?width:\s*petGrid\.cellWidth\s*-\s*Style\.spacing\.sm[\s\S]*?id:\s*openPetsFolderButton[\s\S]*?id:\s*installHooksButton/,
+  "the bottom toolbar must use the pet grid's three-column layout",
 )
 
 assert.match(

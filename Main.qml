@@ -448,7 +448,7 @@ BarWidget {
 
         Button {
           id: installPetButton
-          width: (petActionRow.width - petActionRow.spacing * 2) / 3
+          width: petGrid.cellWidth - Style.spacing.sm
           text: "Install pet"
           bordered: true
           focusable: true
