@@ -48,6 +48,18 @@ assert.doesNotMatch(
 
 assert.match(
   qml,
+  /var\s+pets\s*=\s*\[\{[\s\S]*?id:\s*"glitchcat"[\s\S]*?petPath:\s*""[\s\S]*?spritesheet:\s*Qt\.resolvedUrl\("assets\/pets\/glitchcat\/preview\.png"\)/,
+  "the bundled default must be the first pet shown in the picker",
+)
+
+assert.match(
+  qml,
+  /selected:\s*String\(root\.configuredPetPath\)\s*===\s*String\(petTile\.modelData\.petPath\)[\s\S]*?onClicked:\s*root\.selectPet\(petTile\.modelData\.petPath\)/,
+  "selecting the bundled picker tile must restore the empty default pet path",
+)
+
+assert.match(
+  qml,
   /onPetManifestUrlChanged:\s*\{[\s\S]*?manifestRetryCount\s*=\s*0[\s\S]*?manifestRetryTimer\.restart\(\)/,
   "selecting the first installed pet must schedule a manifest load after settings settle",
 )

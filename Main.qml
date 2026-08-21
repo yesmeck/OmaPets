@@ -133,19 +133,26 @@ BarWidget {
   }
 
   function parseAvailablePets(output) {
-    var pets = []
+    var pets = [{
+      id: "glitchcat",
+      petPath: "",
+      name: "Glitchcat",
+      atlasRows: 9,
+      spritesheet: Qt.resolvedUrl("assets/pets/glitchcat/preview.png")
+    }]
     var lines = String(output || "").trim().split("\n")
     for (var index = 0; index < lines.length; index++) {
       if (lines[index] === "") continue
       var fields = lines[index].split("\t")
       var id = String(fields.shift() || "").trim()
-      if (id === "") continue
+      if (id === "" || id === "glitchcat") continue
       var name = String(fields.shift() || id).trim()
       fields.shift()
       var rows = Number(fields.shift() || 9) === 11 ? 11 : 9
       var previewSheet = "file://" + previewHome + "/" + id + ".png"
       pets.push({
         id: id,
+        petPath: id,
         name: name,
         atlasRows: rows,
         spritesheet: previewSheet
@@ -514,10 +521,10 @@ BarWidget {
           required property var modelData
           width: GridView.view.cellWidth - Style.spacing.sm
           height: GridView.view.cellHeight - Style.spacing.sm
-          selected: String(root.configuredPetPath) === String(petTile.modelData.id)
+          selected: String(root.configuredPetPath) === String(petTile.modelData.petPath)
           bordered: true
           focusable: true
-          onClicked: root.selectPet(petTile.modelData.id)
+          onClicked: root.selectPet(petTile.modelData.petPath)
 
           Item {
             id: petPreview
